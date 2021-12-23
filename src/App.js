@@ -8,7 +8,7 @@ import contenedor from "./img/contenedor.png";
 
 function App() {
   // para este ejemplo 74 es el 100%  de un contenedor
-  const [contenedores, setContenedores] = useState([74, 20, 39, 37]);
+  const [contenedores, setContenedores] = useState([74, 20, 39, 37]); // arreglo con estados con los números que representan la carga
   return (
     <div className="App">
       <img src={trasera} alt="trasera" className="trasera" />
