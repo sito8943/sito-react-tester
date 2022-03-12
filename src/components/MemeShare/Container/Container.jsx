@@ -2,30 +2,31 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
+// style
+import "./style.scss";
+
 const Container = (props) => {
-  const { backgroundColor, backgroundImage, children } = props;
+  const { children, id, className, name, style } = props;
   return (
-    <div
-      style={{
-        backgroundColor,
-        backgroundImage,
-      }}
-    >
+    <div id={id} name={name} className={className} style={style}>
       {children}
     </div>
   );
 };
 
 Container.defaultProps = {
-  backgroundColor: "#4158D0",
-  backgroundImage:
-    "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)",
+  className: "ms-container",
+  id: "",
+  name: "",
+  style: {},
 };
 
 Container.propTypes = {
-  backgroundColor: PropTypes.string,
-  backgroundImage: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
+  children: PropTypes.node.isRequired,
+  style: PropTypes.objectOf(PropTypes.string),
+  className: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export default Container;

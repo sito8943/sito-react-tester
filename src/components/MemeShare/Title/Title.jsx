@@ -2,8 +2,11 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
+// style
+import "./style.scss";
+
 const Title = (props) => {
-  const { id, className, style, name, variant, text } = props;
+  const { id, className, style, name, variant, children } = props;
   return (
     <div
       className={`${variant} ${className}`}
@@ -11,27 +14,26 @@ const Title = (props) => {
       id={id}
       name={name}
     >
-      {text}
+      {children}
     </div>
   );
 };
 
 Title.defaultProps = {
   id: "",
-  className: "",
-  style: "",
+  className: "ms-title",
+  style: {},
   name: "",
   variant: "h1",
-  text: "",
 };
 
 Title.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   name: PropTypes.string,
-  style: PropTypes.string,
+  style: PropTypes.objectOf(PropTypes.string),
   variant: PropTypes.string,
-  text: PropTypes.string,
+  children: PropTypes.node.isRequired,
 };
 
 export default Title;

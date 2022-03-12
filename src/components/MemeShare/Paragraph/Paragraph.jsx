@@ -2,29 +2,31 @@ import React from "react";
 
 import PropTypes from "prop-types";
 
-const Title = (props) => {
-  const { id, className, style, name, text } = props;
+// style
+import "./style.scss";
+
+const Paragraph = (props) => {
+  const { id, className, style, name, children } = props;
   return (
     <p className={className} style={style} id={id} name={name}>
-      {text}
+      {children}
     </p>
   );
 };
 
-Title.defaultProps = {
+Paragraph.defaultProps = {
   id: "",
-  className: "",
-  style: "",
+  className: "ms-paragraph",
+  style: {},
   name: "",
-  text: "",
 };
 
-Title.propTypes = {
+Paragraph.propTypes = {
   id: PropTypes.string,
   className: PropTypes.string,
   name: PropTypes.string,
-  style: PropTypes.string,
-  text: PropTypes.string,
+  style: PropTypes.objectOf(PropTypes.string),
+  children: PropTypes.node.isRequired,
 };
 
-export default Title;
+export default Paragraph;

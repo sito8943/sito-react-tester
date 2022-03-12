@@ -1,0 +1,9 @@
+.ms-container {
+  display: flex;
+  flex-direction: column;
+  background: #2223338c;
+  padding: 3rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 1rem;
+}
