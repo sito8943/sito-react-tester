@@ -1,5 +1,13 @@
-import { BsArrowRight, BsFillRecordFillIconName } from "react-icons/bs";
+import { BsArrowRight, BsFillRecordFill } from "react-icons/bs";
 
-export const RightArrowIcon = () => <BsArrowRight />;
+export const RightArrowIcon = ({ color }) => (
+  <span className={color}>
+    <BsArrowRight />
+  </span>
+);
 
-export const DotIcon = () => <BsFillRecordFillIconName />;
+export const DotIcon = ({ color }) => (
+  <span className={color}>
+    <BsFillRecordFill />
+  </span>
+);
