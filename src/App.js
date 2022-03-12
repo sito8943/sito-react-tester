@@ -29,15 +29,15 @@ function App() {
           <Container className="ms-sub-container">
             <Title variant="h3">Ways to declare a constant</Title>
             <Container className="flex" style={{ marginTop: 25 }}>
-              <JavascriptIcon color={"aliceblue span"} />
+              <PhpIcon color={"aliceblue span"} />
               <Title variant="h5" style={{ marginLeft: 15 }}>
-                Javascript
+                Php
               </Title>
             </Container>
             <Paragraph className="ms-code">
-              <span className="ms-keyword">const</span>{" "}
-              <span className="ms-var">varName</span> ={" "}
-              <span className="ms-string">"some value"</span>;
+              <span className="ms-keyword">definee</span>(
+              <span className="ms-string">"var name"</span>,{" "}
+              <span className="ms-string">"some value"</span>);
             </Paragraph>
           </Container>
         </Container>
