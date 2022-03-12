@@ -1,7 +1,7 @@
 import React from "react";
 
 // icons
-import { DotIcon } from "../Button/IconButton/Icons/icons";
+import { DotIcon } from "../Icons/icons";
 
 // styles
 import "./style.scss";
