@@ -5,6 +5,7 @@ import C from "./Container/Container";
 import PropTypes from "prop-types";
 
 // styles
+import "./colors.scss";
 import "./style.scss";
 
 const MemeShare = (props) => {

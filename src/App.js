@@ -2,10 +2,23 @@ import "./App.css";
 import React from "react";
 
 // components
-import MemeShare, { Title, Container } from "./components/MemeShare/MemeShare";
+import MemeShare, {
+  Title,
+  Container,
+  Paragraph,
+} from "./components/MemeShare/MemeShare";
 import AppleDots from "./components/MemeShare/AppleDots/AppleDots";
-import Button from "./components/MemeShare/Button/Button";
-import { RightArrowIcon } from "./components/MemeShare/Icons/icons";
+import {
+  JavaIcon,
+  JavascriptIcon,
+  SwiftIcon,
+  PhpIcon,
+  KotlinIcon,
+  TypescriptIcon,
+  CPlusPlusIcon,
+  DartIcon,
+  GoIcon,
+} from "./components/MemeShare/Icons/icons";
 
 function App() {
   return (
@@ -15,14 +28,17 @@ function App() {
           <AppleDots />
           <Container className="ms-sub-container">
             <Title variant="h3">Ways to declare a constant</Title>
-            <Container
-              className="flex justify-center"
-              style={{ marginTop: 20 }}
-            >
-              <Button className="ms-icon-button ms-button ease-transition">
-                <RightArrowIcon />
-              </Button>
+            <Container className="flex" style={{ marginTop: 25 }}>
+              <JavascriptIcon color={"aliceblue span"} />
+              <Title variant="h5" style={{ marginLeft: 15 }}>
+                Javascript
+              </Title>
             </Container>
+            <Paragraph className="ms-code">
+              <span className="ms-keyword">const</span>{" "}
+              <span className="ms-var">varName</span> ={" "}
+              <span className="ms-string">"some value"</span>;
+            </Paragraph>
           </Container>
         </Container>
       </MemeShare>
