@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 const Title = (props) => {
   const { id, className, style, name, text } = props;
   return (
-    <div className={className} style={style} id={id} name={name}>
+    <p className={className} style={style} id={id} name={name}>
       {text}
-    </div>
+    </p>
   );
 };
 
