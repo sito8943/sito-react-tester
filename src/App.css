@@ -1,47 +1,55 @@
-html {
-  background-color: #1d1d1d;
+.app-header {
+  padding: 10px;
+  background-color: #282c34;
+  color: white;
 }
 
-.App {
+.app-header > div {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
-.contenedor-div {
-  margin-top: 5px;
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
 }
 
-.carga {
-  margin-top: 86px;
-  z-index: -1;
-  position: absolute;
-  width: 118px;
-  height: 74px;
+.message-list {
+  max-width: 500px;
+  width: 100%;
 }
 
-.no-carga {
-  margin-top: 86px;
-  z-index: -1;
-  position: absolute;
-  width: 118px;
-  height: 74px;
-  background-color: #f2f3f8;
+.message-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem;
+  border-bottom: 1px solid #eeeeee;
 }
 
-.delantera {
-  margin-left: -21px;
-  width: 118px;
-  height: 160px;
+.user,
+.date {
+  font-size: 0.625rem;
+  color: #888888;
 }
 
-.contenedor {
-  width: 118px;
-  margin-left: -4px;
-  height: 160px;
+.user {
+  min-width: 120px;
 }
 
-.trasera {
-  width: 118px;
-  height: 160px;
+.message {
+  flex-grow: 1;
+}
+
+form {
+  max-width: 500px;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
 }
