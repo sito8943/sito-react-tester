@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
-import randomstring from "randomstring";
+import { nanoid } from "nanoid";
 
 import Base62Str from "base62str";
 import CryptoJS from "crypto-js";
@@ -8,10 +8,11 @@ import CryptoJS from "crypto-js";
 import "./App.css";
 
 const base62 = Base62Str.createInstance();
+const re = nanoid();
 
 const MessageInput = ({ socket }) => {
   const [value, setValue] = useState("");
-  const re = "12345";
+
   const submitForm = (e) => {
     e.preventDefault();
     const text = CryptoJS.AES.encrypt(value, re).toString();
