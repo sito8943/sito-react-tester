@@ -22,14 +22,18 @@ const MessageInput = ({ socket }) => {
 
   return (
     <form onSubmit={submitForm}>
-      <input
-        autoFocus
-        value={value}
-        placeholder="Type your message"
-        onChange={(e) => {
-          setValue(e.currentTarget.value);
-        }}
-      />
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <input
+          type="text"
+          autoFocus
+          value={value}
+          placeholder="Type your message"
+          onChange={(e) => {
+            setValue(e.currentTarget.value);
+          }}
+        />
+        <input type="submit" value="Enviar" />
+      </div>
     </form>
   );
 };
@@ -56,6 +60,11 @@ const Users = ({ socket }) => {
     e.preventDefault();
     socket.emit("change:name", { name: value }, (result) => {
       if (!result) return alert("Ha ocurrido un error al cambiar el nombre");
+
+      const users = usersState;
+      var index = users.indexOf(userName);
+      users.splice(index, 1, value);
+      setUsersState(users);
       setUserName(value);
       setValue("");
     });
@@ -64,33 +73,35 @@ const Users = ({ socket }) => {
   return (
     <div className="side-bar">
       <UsersList users={usersState} />
-      <form onSubmit={submitForm}>
+      <form onSubmit={submitForm} style={{ height: 85 }}>
         <label htmlFor="change-name">
           Cambiar nombre (actual: {userName}):
         </label>
-        <input
-          id="change-name"
-          autoFocus
-          value={value}
-          placeholder="Ej: Nombre2"
-          onChange={(e) => {
-            setValue(e.currentTarget.value);
-          }}
-        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <input
+            type="text"
+            id="change-name"
+            autoFocus
+            value={value}
+            placeholder="Ej: Nombre2"
+            onChange={(e) => {
+              setValue(e.currentTarget.value);
+            }}
+          />
+          <input type="submit" value="Cambiar" />
+        </div>
       </form>
     </div>
   );
 };
 
 const Messages = ({ socket }) => {
-  const [messages, setMessages] = useState({});
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const messageListener = (message) => {
       setMessages((prevMessages) => {
-        const newMessages = { ...prevMessages };
-        console.log(newMessages);
-        newMessages[message.id] = message;
+        const newMessages = [...prevMessages, message];
         return newMessages;
       });
     };
@@ -115,7 +126,8 @@ const Messages = ({ socket }) => {
 
   return (
     <div className="message-list">
-      {[...Object.values(messages)]
+      <h2 style={{ margin: 0 }}>Conversación</h2>
+      {messages
         .sort((a, b) => a.time - b.time)
         .map((message, i) => (
           <div
@@ -146,7 +158,7 @@ const Messages = ({ socket }) => {
 const UsersList = ({ socket, users }) => {
   return (
     <ul className="users-list">
-      <h4>Usuarios</h4>
+      <h4 style={{ marginBottom: 10 }}>Usuarios conectados</h4>
       {users.map((user, i) => {
         return <li key={i}>{user}</li>;
       })}
@@ -165,7 +177,6 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="app-header">React Chat</header>
       {socket ? (
         <>
           <div className="chat-container">
