@@ -34,7 +34,36 @@ const MessageInput = ({ socket }) => {
   );
 };
 
-function Messages({ socket }) {
+const ChangeNameForm = ({ socket, currentName }) => {
+  const [value, setValue] = useState("");
+  const [userName, setUserName] = useState("");
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    socket.emit("change:name", { name: value }, (result) => {
+      if (!result) return alert("Ha ocurrido un error al cambiar el nombre");
+      setUserName(value);
+      setValue("");
+    });
+  };
+
+  return (
+    <form onSubmit={submitForm}>
+      <label htmlFor="change-name">Cambiar nombre (actual: {userName}):</label>
+      <input
+        id="change-name"
+        autoFocus
+        value={value}
+        placeholder="Ej: Nombre2"
+        onChange={(e) => {
+          setValue(e.currentTarget.value);
+        }}
+      />
+    </form>
+  );
+};
+
+const Messages = ({ socket }) => {
   const [messages, setMessages] = useState({});
 
   useEffect(() => {
@@ -93,9 +122,19 @@ function Messages({ socket }) {
         ))}
     </div>
   );
-}
+};
 
-function App() {
+const UsersList = ({ socket, users }) => {
+  return (
+    <ul className="users-list">
+      {users.map((user, i) => {
+        return <li key={i}>{user}</li>;
+      })}
+    </ul>
+  );
+};
+
+const App = () => {
   const [socket, setSocket] = useState(null);
   const [userState, setUser] = useState("");
   const [usersState, setUsers] = useState([]);
@@ -111,22 +150,27 @@ function App() {
     const { name, users } = data;
     setUser(name);
     setUsers(users);
-    console.log(name, users);
   };
 
   return (
     <div className="App">
       <header className="app-header">React Chat</header>
       {socket ? (
-        <div className="chat-container">
-          <Messages socket={socket} />
-          <MessageInput socket={socket} />
-        </div>
+        <>
+          <div className="chat-container">
+            <Messages socket={socket} />
+            <MessageInput socket={socket} />
+          </div>
+          <div className="side-bar">
+            <UsersList socket={socket} users={usersState} />
+            <ChangeNameForm socket={socket} userState={userState} />
+          </div>
+        </>
       ) : (
         <div>Not Connected</div>
       )}
     </div>
   );
-}
+};
 
 export default App;
