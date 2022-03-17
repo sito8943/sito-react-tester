@@ -34,9 +34,23 @@ const MessageInput = ({ socket }) => {
   );
 };
 
-const ChangeNameForm = ({ socket, currentName }) => {
+const Users = ({ socket }) => {
   const [value, setValue] = useState("");
   const [userName, setUserName] = useState("");
+  const [usersState, setUsersState] = useState([]);
+
+  useEffect(() => {
+    socket.on("init", init);
+    return () => {
+      socket.off("init", init);
+    };
+  }, [socket]);
+
+  const init = (data) => {
+    const { name, users } = data;
+    setUserName(name);
+    setUsersState(users);
+  };
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -48,18 +62,23 @@ const ChangeNameForm = ({ socket, currentName }) => {
   };
 
   return (
-    <form onSubmit={submitForm}>
-      <label htmlFor="change-name">Cambiar nombre (actual: {userName}):</label>
-      <input
-        id="change-name"
-        autoFocus
-        value={value}
-        placeholder="Ej: Nombre2"
-        onChange={(e) => {
-          setValue(e.currentTarget.value);
-        }}
-      />
-    </form>
+    <div className="side-bar">
+      <UsersList users={usersState} />
+      <form onSubmit={submitForm}>
+        <label htmlFor="change-name">
+          Cambiar nombre (actual: {userName}):
+        </label>
+        <input
+          id="change-name"
+          autoFocus
+          value={value}
+          placeholder="Ej: Nombre2"
+          onChange={(e) => {
+            setValue(e.currentTarget.value);
+          }}
+        />
+      </form>
+    </div>
   );
 };
 
@@ -127,6 +146,7 @@ const Messages = ({ socket }) => {
 const UsersList = ({ socket, users }) => {
   return (
     <ul className="users-list">
+      <h4>Usuarios</h4>
       {users.map((user, i) => {
         return <li key={i}>{user}</li>;
       })}
@@ -136,21 +156,12 @@ const UsersList = ({ socket, users }) => {
 
 const App = () => {
   const [socket, setSocket] = useState(null);
-  const [userState, setUser] = useState("");
-  const [usersState, setUsers] = useState([]);
 
   useEffect(() => {
     const newSocket = io(`http://localhost:3000`);
-    newSocket.on("init", init);
     setSocket(newSocket);
     return () => newSocket.close();
   }, [setSocket]);
-
-  const init = (data) => {
-    const { name, users } = data;
-    setUser(name);
-    setUsers(users);
-  };
 
   return (
     <div className="App">
@@ -161,10 +172,7 @@ const App = () => {
             <Messages socket={socket} />
             <MessageInput socket={socket} />
           </div>
-          <div className="side-bar">
-            <UsersList socket={socket} users={usersState} />
-            <ChangeNameForm socket={socket} userState={userState} />
-          </div>
+          <Users socket={socket} />
         </>
       ) : (
         <div>Not Connected</div>
