@@ -1,47 +1,5 @@
-html {
-  background-color: #1d1d1d;
-}
-
 .App {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.contenedor-div {
-  margin-top: 5px;
-}
-
-.carga {
-  margin-top: 86px;
-  z-index: -1;
-  position: absolute;
-  width: 118px;
-  height: 74px;
-}
-
-.no-carga {
-  margin-top: 86px;
-  z-index: -1;
-  position: absolute;
-  width: 118px;
-  height: 74px;
-  background-color: #f2f3f8;
-}
-
-.delantera {
-  margin-left: -21px;
-  width: 118px;
-  height: 160px;
-}
-
-.contenedor {
-  width: 118px;
-  margin-left: -4px;
-  height: 160px;
-}
-
-.trasera {
-  width: 118px;
-  height: 160px;
 }
